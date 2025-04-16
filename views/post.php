@@ -44,23 +44,23 @@ $user = $_SESSION['user'];
         <form method="POST">
             <button name="like">👍 Like (<?= $post['Likes'] ?>)</button>
             <button name="dislike">👎 Dislike (<?= $post['Dislikes'] ?>)</button>
-
-            <?php if ($user['UserID'] !== $post['UserID']): ?>
-                <form method="POST" action="report_handler.php" onsubmit="return confirm('Submit this report?');">
-                    <input type="hidden" name="report_post" value="1">
-                    <input type="hidden" name="post_id" value="<?= $post['PostID'] ?>">
-
-                    <!-- Toggle button -->
-                    <button type="button" onclick="toggleReason('post-reason')" style="text-decoration: underline;">Report Post</button>
-
-                    <!-- Hidden textarea -->
-                    <div id="post-reason" style="display: none; margin-top: 5px;">
-                        <textarea name="reason" placeholder="Reason for reporting" required></textarea><br>
-                        <button class="submit-reason" type="submit" >Submit Report</button>
-                    </div>
-                </form>
-            <?php endif; ?>
         </form>
+
+        <?php if ($user['UserID'] !== $post['UserID']): ?>
+            <form method="POST" action="report_handler.php" onsubmit="return confirm('Submit this report?');">
+                <input type="hidden" name="report_post" value="1">
+                <input type="hidden" name="post_id" value="<?= $post['PostID'] ?>">
+
+                <!-- Toggle button -->
+                <button type="button" onclick="toggleReason('post-reason')" style="text-decoration: underline;">Report Post</button>
+
+                <!-- Hidden textarea -->
+                <div id="post-reason" style="display: none; margin-top: 5px;">
+                    <textarea name="reason" placeholder="Reason for reporting" required></textarea><br>
+                    <button class="submit-reason" type="submit">Submit Report</button>
+                </div>
+            </form>
+        <?php endif; ?>
         <br>
         <hr>
         <h3>Comments</h3>
