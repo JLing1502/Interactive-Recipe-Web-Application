@@ -6,9 +6,45 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-body{
+body {
   overflow: hidden;
+  background-color: #E4E9F7;
+  margin: 0;
+  padding-top: 20px; /* creates space at top */
 }
+
+/* Container to center the search bar */
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Style for the form */
+.search-bar {
+  display: flex;
+  gap: 5px;
+}
+
+/* Input and button styles */
+.search-bar input[name="q"] {
+  padding: 6px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  min-width: 250px;
+}
+
+.search-bar button[type="submit"] {
+  padding: 6px 10px;
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+
 .sidebar{
   position: fixed;
   top: 0;
