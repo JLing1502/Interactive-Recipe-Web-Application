@@ -60,4 +60,23 @@ class Post {
         // Remove like if exists
         $this->conn->prepare("DELETE FROM POSTLIKES WHERE PostID = ? AND UserID = ?")->execute([$postId, $userId]);
     }
+
+    public function getUserPosts($userId) {
+        $stmt = $this->conn->prepare("SELECT * FROM POSTS WHERE UserID = ? ORDER BY CreatedAt DESC");
+        $stmt->execute([$userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function getLikedPosts($userId) {
+        $stmt = $this->conn->prepare("
+            SELECT p.*
+            FROM POSTLIKES pl
+            JOIN POSTS p ON pl.PostID = p.PostID
+            WHERE pl.UserID = ?
+            ORDER BY pl.CreatedAt DESC
+        ");
+        $stmt->execute([$userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 }

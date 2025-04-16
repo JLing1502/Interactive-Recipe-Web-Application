@@ -28,10 +28,10 @@
                 <i class='bx bxs-chevron-down arrow'></i>
             </div>
             <ul class="sub-menu">
-                <li><a class="link_name" href="#">MyFeed</a></li>
-                <li><a href="#">My Posts</a></li>
-                <li><a href="#">My Comments</a></li>
-                <li><a href="#">My Likes</a></li>
+                <li><a class="link_name" href="community.php">MyFeed</a></li>
+                <li><a href="my_posts.php">My Posts</a></li>
+                <li><a href="my_comments.php">My Comments</a></li>
+                <li><a href="my_likes.php">My Likes</a></li>
             </ul>
         </li>
         <li>

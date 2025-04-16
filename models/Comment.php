@@ -22,4 +22,17 @@ class Comment {
         $stmt->execute([$postId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getUserComments($userId) {
+        $stmt = $this->conn->prepare("
+            SELECT c.*, p.Title 
+            FROM COMMENTS c
+            JOIN POSTS p ON c.PostID = p.PostID
+            WHERE c.UserID = ?
+            ORDER BY c.CreatedAt DESC
+        ");
+        $stmt->execute([$userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 }
