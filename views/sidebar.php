@@ -117,7 +117,9 @@
                     <div class="profile_name">Prem Shahi</div>
                     <div class="job">Web Desginer</div>
                 </div>
+                <a href="logout.php">
                 <i class='bx bx-log-out'></i>
+                </a>
             </div>
         </li>
     </ul>
