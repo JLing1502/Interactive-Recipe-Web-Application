@@ -17,22 +17,25 @@ include("sidebar.php");
 ?>
 
 <section class="home-section">
-  <div class="home-content"><span class="text">Liked Posts</span></div>
-  <div class="dashboard-content2">
-    <h2>Posts You Liked</h2>
-    <?php if (!empty($likedPosts)): ?>
-        <?php foreach ($likedPosts as $post): ?>
-            <div class="content-box">
-                <h4><?= htmlspecialchars($post['Title']) ?></h4>
-                <p><?= nl2br(htmlspecialchars($post['Content'])) ?></p>
-                <small>Liked on <?= $post['CreatedAt'] ?></small><br>
-                <a href="post.php?id=<?= $post['PostID'] ?>">View</a>
-            </div><br>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <p>You haven’t liked any posts yet.</p>
-    <?php endif; ?>
-  </div>
+    <div class="home-content">
+        <i class='bx bx-menu'></i>
+        <span class="text">Liked Posts</span>
+    </div>
+    <div class="dashboard-content2">
+        <h2>Posts You Liked</h2>
+        <?php if (!empty($likedPosts)): ?>
+            <?php foreach ($likedPosts as $post): ?>
+                <div class="content-box">
+                    <h4><?= htmlspecialchars($post['Title']) ?></h4>
+                    <p><?= nl2br(htmlspecialchars($post['Content'])) ?></p>
+                    <small>Liked on <?= $post['CreatedAt'] ?></small><br>
+                    <a href="post.php?id=<?= $post['PostID'] ?>">View</a>
+                </div><br>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>You haven’t liked any posts yet.</p>
+        <?php endif; ?>
+    </div>
 </section>
 
 <?php include("footer.php"); ?>

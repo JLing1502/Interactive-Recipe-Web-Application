@@ -35,4 +35,10 @@ class Comment {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    public function getCommentById($commentId) {
+        $stmt = $this->conn->prepare("SELECT * FROM COMMENTS WHERE CommentID = ?");
+        $stmt->execute([$commentId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
 }

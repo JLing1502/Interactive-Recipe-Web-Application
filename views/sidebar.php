@@ -14,7 +14,7 @@
             </ul>
         </li>
         <li>
-            <a href="#">
+            <a href="notification.php">
                 <i class='bx bx-bell'></i>
                 <span class="link_name">Notification</span>
             </a>

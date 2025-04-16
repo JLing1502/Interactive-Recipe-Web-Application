@@ -15,11 +15,10 @@ body {
 
 /* Container to center the search bar */
 .search-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-  margin-top: 20px;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  z-index: 999;
 }
 
 /* Style for the form */
@@ -27,21 +26,21 @@ body {
   display: flex;
   gap: 5px;
 }
-
 /* Input and button styles */
 .search-bar input[name="q"] {
   padding: 6px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  min-width: 250px;
+  min-width: 350px;
 }
 
 .search-bar button[type="submit"] {
   padding: 6px 10px;
-  background-color: #1e90ff;
+  background-color: #8dc0f3;
   color: white;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 

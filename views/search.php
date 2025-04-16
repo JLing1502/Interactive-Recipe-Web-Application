@@ -64,6 +64,7 @@ if (!empty($keyword)) {
         <?php else: ?>
             <p>No matching comments found.</p>
         <?php endif; ?>
+        <br><a href="community.php">← Back to Community Feed</a>
     </div>
 </section>
 
