@@ -19,7 +19,7 @@ include("sidebar.php");
 <section class="home-section">
     <div class="home-content">
         <i class='bx bx-menu'></i>
-        <span class="text">Liked Posts</span>
+        <span class="text">DishCraft</span>
     </div>
     <div class="dashboard-content2">
         <h2>Posts You Liked</h2>

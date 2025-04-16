@@ -35,7 +35,7 @@ include("sidebar.php");
 <section class="home-section">
     <div class="home-content">
         <i class='bx bx-menu'></i>
-        <span class="text">My Posts</span>
+        <span class="text">DishCraft</span>
         <span>
             <div class="search-container">
                 <form method="GET" action="my_posts.php" class="search-bar">

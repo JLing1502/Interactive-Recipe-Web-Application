@@ -20,7 +20,7 @@ $user = $_SESSION['user'];
 <section class="home-section">
   <div class="home-content">
     <i class='bx bx-menu'></i>
-    <span class="text">Community Feed</span>
+    <span class="text">Discraft Community Feed</span>
     <span>
       <div class="search-container">
         <form method="GET" action="search.php" class="search-bar">

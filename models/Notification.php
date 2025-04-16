@@ -16,13 +16,14 @@ class Notification {
 
     public function getUserNotifications($userId) {
         $stmt = $this->conn->prepare("
-            SELECT n.*, t.TypeName 
+            SELECT n.*, t.TypeName, n.CreatedAt 
             FROM NOTIFICATIONS n 
             JOIN NOTIFICATIONTYPE t ON n.TypeID = t.TypeID 
             WHERE n.UserID = ?
-            ORDER BY NotificationID DESC
+            ORDER BY n.CreatedAt DESC
         ");
         $stmt->execute([$userId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
 }
