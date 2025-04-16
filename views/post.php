@@ -44,19 +44,24 @@ $user = $_SESSION['user'];
         <form method="POST">
             <button name="like">👍 Like (<?= $post['Likes'] ?>)</button>
             <button name="dislike">👎 Dislike (<?= $post['Dislikes'] ?>)</button>
+
+            <?php if ($user['UserID'] !== $post['UserID']): ?>
+                <form method="POST" action="report_handler.php" onsubmit="return confirm('Submit this report?');">
+                    <input type="hidden" name="report_post" value="1">
+                    <input type="hidden" name="post_id" value="<?= $post['PostID'] ?>">
+
+                    <!-- Toggle button -->
+                    <button type="button" onclick="toggleReason('post-reason')" style="text-decoration: underline;">Report Post</button>
+
+                    <!-- Hidden textarea -->
+                    <div id="post-reason" style="display: none; margin-top: 5px;">
+                        <textarea name="reason" placeholder="Reason for reporting" required></textarea><br>
+                        <button class="submit-reason" type="submit" >Submit Report</button>
+                    </div>
+                </form>
+            <?php endif; ?>
         </form>
-
-        <?php if ($user['UserID'] !== $post['UserID']): ?>
-            <form method="POST" action="report_handler.php">
-                <input type="hidden" name="report_post" value="1">
-                <input type="hidden" name="post_id" value="<?= $post['PostID'] ?>">
-                <textarea name="reason" placeholder="Reason for reporting this post" required></textarea><br>
-                <button type="submit" style="background: orange;">Report Post</button>
-            </form>
-        <?php endif; ?>
-        
         <br>
-
         <hr>
         <h3>Comments</h3>
         <?php if (!empty($comments)): ?>
@@ -65,12 +70,20 @@ $user = $_SESSION['user'];
                     <strong><?= htmlspecialchars($comment['Name']) ?></strong><br>
                     <?= nl2br(htmlspecialchars($comment['Content'])) ?><br>
                     <small><?= htmlspecialchars($comment['CreatedAt']) ?></small>
-                    <form method="POST" action="report_handler.php" style="margin-top: 5px;">
-                        <input type="hidden" name="report_comment" value="1">
-                        <input type="hidden" name="comment_id" value="<?= $comment['CommentID'] ?>">
-                        <input type="text" name="reason" placeholder="Reason" required>
-                        <button type="submit" style="font-size: small;">Report</button>
-                    </form>
+
+                    <?php if ($user['UserID'] !== $comment['UserID']): ?>
+                        <form method="POST" action="report_handler.php" onsubmit="return confirm('Submit this report?');" style="margin-top: 5px;">
+                            <input type="hidden" name="report_comment" value="1">
+                            <input type="hidden" name="comment_id" value="<?= $comment['CommentID'] ?>">
+
+                            <button type="button" onclick="toggleReason('comment-reason-<?= $comment['CommentID'] ?>')" style="text-decoration: underline;">Report</button>
+
+                            <div id="comment-reason-<?= $comment['CommentID'] ?>" style="display: none; margin-top: 5px;">
+                                <input type="text" name="reason" placeholder="Reason" required>
+                                <button class="comment-report" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
@@ -86,5 +99,16 @@ $user = $_SESSION['user'];
     </div>
 
 </section>
+
+<script>
+    function toggleReason(id) {
+        const reasonBox = document.getElementById(id);
+        if (reasonBox.style.display === "none") {
+            reasonBox.style.display = "block";
+        } else {
+            reasonBox.style.display = "none";
+        }
+    }
+</script>
 
 <?php include("footer.php"); ?>

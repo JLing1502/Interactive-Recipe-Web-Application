@@ -363,6 +363,32 @@ body{
       width: 20%;
       box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2), 0 4px 15px 0 rgba(0,0,0,0.19);
     }
+
+    .submit-reason {
+      background-color: #66a0eb;
+      padding: 10px;
+      margin-bottom: 10px;
+      border:none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 15px;
+      width: 20%;
+      box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2), 0 4px 15px 0 rgba(0,0,0,0.19);
+      
+    }
+
+    .comment-report{
+      background-color: #66a0eb;
+      padding: 10px;
+      margin-bottom: 10px;
+      border:none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 15px;
+      width: 15%;
+      box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2), 0 4px 15px 0 rgba(0,0,0,0.19);
+      
+    }
   }
 
   .update-btn {
