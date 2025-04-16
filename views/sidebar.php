@@ -1,6 +1,6 @@
 <div class="sidebar close">
     <div class="logo-details">
-    <i class='bx bx-bowl-rice' ></i>
+        <i class='bx bx-bowl-rice'></i>
         <span class="logo_name">DishCraft</span>
     </div>
     <ul class="nav-links">
@@ -15,7 +15,7 @@
         </li>
         <li>
             <a href="#">
-            <i class='bx bx-bell' ></i>
+                <i class='bx bx-bell'></i>
                 <span class="link_name">Notification</span>
             </a>
         </li>
@@ -37,7 +37,7 @@
         <li>
             <div class="iocn-link">
                 <a href="#">
-                <i class='bx bx-book-content' ></i>
+                    <i class='bx bx-book-content'></i>
                     <span class="link_name">Recipe</span>
                 </a>
                 <i class='bx bxs-chevron-down arrow'></i>
@@ -48,28 +48,35 @@
                 <li><a href="#">Favourite Recipe</a></li>
             </ul>
         </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-pie-chart-alt-2'></i>
-                <span class="link_name">Analytics</span>
-            </a>
-            <ul class="sub-menu blank">
-                <li><a class="link_name" href="#">Analytics</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-line-chart'></i>
-                <span class="link_name">Chart</span>
-            </a>
-            <ul class="sub-menu blank">
-                <li><a class="link_name" href="#">Chart</a></li>
-            </ul>
-        </li>
+        <?php if (isset($_SESSION['user']) && $_SESSION['user']['RoleID'] == 1): ?>
+            <li>
+                <a href="#">
+                    <i class='bx bx-pie-chart-alt-2'></i>
+                    <span class="link_name">Analytics</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Analytics</a></li>
+                </ul>
+            </li>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['user']) && $_SESSION['user']['RoleID'] == 1): ?>
+            <li>
+                <a href="#">
+                    <i class='bx bx-flag'></i>
+                    <span class="link_name">Reports</span>
+                </a>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Post Reports</a></li>
+                    <li><a class="link_name" href="#">Comment Reports</a></li>
+                </ul>
+            </li>
+        <?php endif; ?>
+
         <li>
             <div class="iocn-link">
                 <a href="#">
-                <i class='bx bx-food-menu' ></i>
+                    <i class='bx bx-food-menu'></i>
                     <span class="link_name">Meal Plans</span>
                 </a>
                 <i class='bx bxs-chevron-down arrow'></i>
@@ -80,12 +87,16 @@
             </ul>
         </li>
         <li>
-            <a href="#">
-            <i class='bx bxs-party' ></i>
-                <span class="link_name">Event</span>
-            </a>
-            <ul class="sub-menu blank">
-                <li><a class="link_name" href="#">My Event</a></li>
+            <div class="iocn-link">
+                <a href="#">
+                    <i class='bx bxs-party'></i>
+                    <span class="link_name">Event</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Events</a></li>
+                <li><a href="#">Joined Events</a></li>
             </ul>
         </li>
         <li>
