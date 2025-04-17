@@ -14,6 +14,7 @@ $data = $controller->handleRequest();
 $post = $data['post'];
 $comments = $data['comments'];
 $user = $_SESSION['user'];
+$highlight = $_GET['highlight_comment'] ?? null;
 ?>
 
 <?php include("header.php"); ?>
@@ -33,13 +34,22 @@ $user = $_SESSION['user'];
         <?php if ($user['UserID'] === $post['UserID']): ?>
             <div class="editdelete-btn">
                 <a href="edit_post.php?id=<?= $post['PostID'] ?>"><button>Edit Post</button></a>
-
-                <form method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                <form method="POST" action="post.php?id=<?= $post['PostID'] ?>" onsubmit="return confirm('Are you sure you want to delete this post?');" style="display:inline;">
                     <input type="hidden" name="delete" value="1">
+                    <input type="hidden" name="post_id" value="<?= $post['PostID'] ?>">
                     <button class="delete-btn" type="submit">Delete Post</button>
                 </form>
             </div>
+        <?php elseif ($user['RoleID'] == 1): ?>
+            <div class="editdelete-btn">
+                <form method="POST" action="post.php?id=<?= $post['PostID'] ?>" onsubmit="return confirm('Are you sure you want to delete this post?');" style="display:inline;">
+                    <input type="hidden" name="delete" value="1">
+                    <input type="hidden" name="post_id" value="<?= $post['PostID'] ?>">
+                    <button class="delete-btn" type="submit" style="background-color: red; color: white;">Delete Post</button>
+                </form>
+            </div>
         <?php endif; ?>
+
 
         <form method="POST">
             <button name="like">👍 Like (<?= $post['Likes'] ?>)</button>
@@ -66,26 +76,39 @@ $user = $_SESSION['user'];
         <h3>Comments</h3>
         <?php if (!empty($comments)): ?>
             <?php foreach ($comments as $comment): ?>
-                <div class="comment-section">
+                <div class="comment-section" id="comment-<?= $comment['CommentID'] ?>"
+                    style="<?= ($highlight == $comment['CommentID']) ? 'background-color: #fff8c6; border-left: 5px solid orange;' : '' ?>">
                     <strong><?= htmlspecialchars($comment['Name']) ?></strong><br>
                     <?= nl2br(htmlspecialchars($comment['Content'])) ?><br>
                     <small><?= htmlspecialchars($comment['CreatedAt']) ?></small>
 
-                    <?php if ($user['UserID'] !== $comment['UserID']): ?>
-                        <form method="POST" action="report_handler.php" onsubmit="return confirm('Submit this report?');" style="margin-top: 5px;">
-                            <input type="hidden" name="report_comment" value="1">
-                            <input type="hidden" name="comment_id" value="<?= $comment['CommentID'] ?>">
+                    <div style="margin-top: 5px;">
+                        <?php if ($user['UserID'] === $comment['UserID'] || $user['RoleID'] == 1): ?>
+                            <form method="POST" action="post.php?id=<?= $post['PostID'] ?>" onsubmit="return confirm('Are you sure you want to delete this comment?');" style="display:inline;">
+                                <input type="hidden" name="delete_comment" value="1">
+                                <input type="hidden" name="comment_id" value="<?= $comment['CommentID'] ?>">
+                                <button class="comment-delete" type="submit" style="background-color: crimson; color: white; border: none; padding: 4px 8px; margin-right: 10px;">Delete</button>
+                            </form>
+                        <?php endif; ?>
 
-                            <button type="button" onclick="toggleReason('comment-reason-<?= $comment['CommentID'] ?>')" style="text-decoration: underline;">Report</button>
+                        <?php if ($user['UserID'] !== $comment['UserID']): ?>
+                            <form method="POST" action="post.php?id=<?= $post['PostID'] ?>" onsubmit="return confirm('Submit this report?');" style="display:inline;">
+                                <input type="hidden" name="report_comment" value="1">
+                                <input type="hidden" name="comment_id" value="<?= $comment['CommentID'] ?>">
+                                <input type="hidden" name="post_id" value="<?= $post['PostID'] ?>">
 
-                            <div id="comment-reason-<?= $comment['CommentID'] ?>" style="display: none; margin-top: 5px;">
-                                <input type="text" name="reason" placeholder="Reason" required>
-                                <button class="comment-report" type="submit">Submit</button>
-                            </div>
-                        </form>
-                    <?php endif; ?>
+                                <button type="button" onclick="toggleReason('comment-reason-<?= $comment['CommentID'] ?>')" style="text-decoration: underline;">Report</button>
+
+                                <div id="comment-reason-<?= $comment['CommentID'] ?>" style="display: none; margin-top: 5px;">
+                                    <input type="text" name="reason" placeholder="Reason" required>
+                                    <button class="comment-report" type="submit">Submit</button>
+                                </div>
+                            </form>
+                        <?php endif; ?>
+                    </div>
                 </div>
             <?php endforeach; ?>
+
         <?php else: ?>
             <p>No comments yet. Be the first to comment!</p>
         <?php endif; ?>
@@ -110,5 +133,17 @@ $user = $_SESSION['user'];
         }
     }
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const highlighted = document.querySelector("[id^='comment-'][style*='background-color']");
+        if (highlighted) {
+            highlighted.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }
+    });
+</script>
+
 
 <?php include("footer.php"); ?>

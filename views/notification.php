@@ -30,7 +30,6 @@ include("sidebar.php");
                 if ($createdAt !== false) {
                     $createdAt->setTimezone(new DateTimeZone('Asia/Kuala_Lumpur'));
                 } else {
-                    // fallback to current time (optional)
                     $createdAt = new DateTime('now', new DateTimeZone('Asia/Kuala_Lumpur'));
                 }
 
@@ -71,6 +70,7 @@ include("sidebar.php");
         <?php else: ?>
             <p>No notifications yet!</p>
         <?php endif; ?>
+        
     </div>
 </section>
 

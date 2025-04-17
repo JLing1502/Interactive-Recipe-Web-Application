@@ -6,11 +6,13 @@ class Comment {
         $this->conn = $db;
     }
 
+    // comment on a post
     public function addComment($postId, $userId, $content) {
         $stmt = $this->conn->prepare("INSERT INTO COMMENTS (PostID, UserID, Content, CreatedAt, UpdatedAt) VALUES (?, ?, ?, NOW(), NOW())");
         return $stmt->execute([$postId, $userId, $content]);
     }
 
+    //get comment on a particular post
     public function getCommentsByPost($postId) {
         $stmt = $this->conn->prepare("
             SELECT c.*, u.Name
@@ -23,6 +25,7 @@ class Comment {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    //get userid from comments
     public function getUserComments($userId) {
         $stmt = $this->conn->prepare("
             SELECT c.*, p.Title 
@@ -35,10 +38,20 @@ class Comment {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    //retrieve comment
     public function getCommentById($commentId) {
         $stmt = $this->conn->prepare("SELECT * FROM COMMENTS WHERE CommentID = ?");
         $stmt->execute([$commentId]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    //Untuk delete comment (Admin function) if it still doesnt work, i'll give up and work as tukang jual sayur at pasar am Sabah
+    public function deleteComment($commentId) {
+        $sql = "DELETE FROM COMMENTS WHERE CommentID = :commentId";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([':commentId' => $commentId]);
+    }   
     
 }
+
+/*I spent 2 weeks on this, whoever messed it up I can see in github*/

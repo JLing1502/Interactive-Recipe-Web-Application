@@ -34,6 +34,7 @@
                 <li><a href="my_likes.php">My Likes</a></li>
             </ul>
         </li>
+        
         <li>
             <div class="iocn-link">
                 <a href="#">
@@ -48,31 +49,38 @@
                 <li><a href="#">Favourite Recipe</a></li>
             </ul>
         </li>
+        
         <?php if (isset($_SESSION['user']) && $_SESSION['user']['RoleID'] == 1): ?>
             <li>
-                <a href="#">
-                    <i class='bx bx-pie-chart-alt-2'></i>
-                    <span class="link_name">Analytics</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Analytics</a></li>
-                </ul>
-            </li>
-        <?php endif; ?>
-
-        <?php if (isset($_SESSION['user']) && $_SESSION['user']['RoleID'] == 1): ?>
-            <li>
-                <a href="#">
-                    <i class='bx bx-flag'></i>
-                    <span class="link_name">Reports</span>
-                </a>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-pie-chart-alt-2'></i>
+                        <span class="link_name">Analytics</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
                 <ul class="sub-menu">
-                    <li><a class="link_name" href="#">Post Reports</a></li>
-                    <li><a class="link_name" href="#">Comment Reports</a></li>
+                    <li><a href="#">Analytics</a></li>
                 </ul>
             </li>
         <?php endif; ?>
 
+        <?php if (isset($_SESSION['user']) && $_SESSION['user']['RoleID'] == 1): ?>
+            <li>
+                <div class="iocn-link">
+                    <a href="admin_reports.php">
+                        <i class='bx bx-flag'></i>
+                        <span class="link_name">Reports</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a href="admin_reports.php">User Reports</a></li>
+                    
+                </ul>
+            </li>
+        <?php endif; ?>
+        
         <li>
             <div class="iocn-link">
                 <a href="#">
@@ -86,6 +94,7 @@
                 <li><a href="#">My Meal Plans</a></li>
             </ul>
         </li>
+        
         <li>
             <div class="iocn-link">
                 <a href="#">
@@ -94,10 +103,17 @@
                 </a>
                 <i class='bx bxs-chevron-down arrow'></i>
             </div>
+            
             <ul class="sub-menu">
                 <li><a class="link_name" href="#">Events</a></li>
+                <li><a href="#">Event Feed</a></li>
                 <li><a href="#">Joined Events</a></li>
+                <?php if (isset($_SESSION['user']) && $_SESSION['user']['RoleID'] == 1): ?>
+                    <li><a href="#">Create Event (Admin)</a></li>
+                    <li><a href="#">View Submissions</a></li>
+                <?php endif; ?>
             </ul>
+
         </li>
         <li>
             <a href="#">
@@ -118,7 +134,7 @@
                     <div class="job">Web Desginer</div>
                 </div>
                 <a href="logout.php">
-                <i class='bx bx-log-out'></i>
+                    <i class='bx bx-log-out'></i>
                 </a>
             </div>
         </li>
