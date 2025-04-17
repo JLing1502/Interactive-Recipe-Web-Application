@@ -18,8 +18,25 @@ class RecipeController
 
     public function handleRequest()
     {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_recipe'])) {
+            $recipeId = $this->recipeModel->addRecipe($_POST, $_FILES);
 
-        // fetch from model
+            if ($recipeId) {
+                $this->recipeModel->addIngredients(
+                    $recipeId,
+                    $_POST['ingredients'] ?? [],
+                    $_POST['quantities'] ?? [],
+                    $_POST['units'] ?? []
+                );
+                header("Location: recipe_success.php");
+                exit;
+            } else {
+                echo "Failed to add recipe.";
+                exit;
+            }
+        }
+
+        // Only fetch this if not POST
         $categories = $this->recipeModel->getAllCategories();
         $dishes = $this->recipeModel->getAllDishes();
         $ingredients = $this->recipeModel->getAllIngredients();
@@ -29,22 +46,5 @@ class RecipeController
             'dishes' => $dishes,
             'ingredients' => $ingredients
         ];
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_recipe'])) {
-            $recipeId = $this->recipeModel->addRecipe($_POST, $_FILES);
-
-            if ($recipeId) {
-                $this->recipeModel->addIngredients(
-                    $recipeId,
-                    $_POST['ingredients'],
-                    $_POST['quantities'],
-                    $_POST['units']
-                );
-                header("Location: recipe_success.php");
-                exit;
-            } else {
-                echo "Failed to add recipe.";
-            }
-        }
     }
 }
