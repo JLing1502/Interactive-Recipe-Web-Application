@@ -1,3 +1,5 @@
+<!---Kim's Sidebar, please add a comment on whichever part you guys added--->
+
 <div class="sidebar close">
     <div class="logo-details">
         <i class='bx bx-bowl-rice'></i>
@@ -45,7 +47,7 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link_name" href="#">Recipe</a></li>
-                <li><a href="#">New Recipe</a></li>
+                <li><a href="add_recipe.php">New Recipe</a></li>
                 <li><a href="#">Favourite Recipe</a></li>
             </ul>
         </li>
