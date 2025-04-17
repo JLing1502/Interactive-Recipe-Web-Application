@@ -107,9 +107,11 @@
             </div>
             
             <ul class="sub-menu">
-                <li><a class="link_name" href="#">Events</a></li>
-                <li><a href="#">Event Feed</a></li>
-                <li><a href="#">Joined Events</a></li>
+                <li><a class="link_name" href="view_event.php">View All Events</a></li>
+                <li><a href="event_approval.php">Event Approvals</a></li>
+                <li><a href="event_participate.php">Join Events</a></li>
+                <li><a href="participated_myevent.php">Show my registered Event</a></li>
+                <li><a href="event_submit_recipe.php">Submit</a></li>
                 <?php if (isset($_SESSION['user']) && $_SESSION['user']['RoleID'] == 1): ?>
                     <li><a href="#">Create Event (Admin)</a></li>
                     <li><a href="#">View Submissions</a></li>

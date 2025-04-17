@@ -17,4 +17,8 @@ class Database {
         }
         return $this->conn;
     }
+
+    public function getConnection() {
+        return $this->connect();
+    }
 }
